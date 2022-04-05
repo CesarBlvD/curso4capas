@@ -76,5 +76,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sistema.Negocio\Sistema.Negocio.csproj">
+      <Project>{8b61a6a2-38ef-4d17-8a14-49626c08f419}</Project>
+      <Name>Sistema.Negocio</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
