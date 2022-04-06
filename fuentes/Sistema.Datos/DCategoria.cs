@@ -9,9 +9,9 @@ using System.Data.SqlClient;
 
 namespace Sistema.Datos
 {
-    public class DCategoria
+    public static class DCategoria
     {
-        public DataTable Listar()
+        public static DataTable Listar()
         {
             SqlDataReader Resultado;
             DataTable Tabla = new DataTable();
@@ -35,7 +35,7 @@ namespace Sistema.Datos
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
             }
         }
-        public DataTable Buscar(string Valor)
+        public static DataTable Buscar(string Valor)
         {
             SqlDataReader Resultado;
             DataTable Tabla = new DataTable();
@@ -60,7 +60,7 @@ namespace Sistema.Datos
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
             }
         }
-        public string Existe(string Valor)
+        public static string Existe(string Valor)
         {
             string Rpta = "";
             SqlConnection SqlCon = new SqlConnection();
@@ -89,7 +89,7 @@ namespace Sistema.Datos
             }
             return Rpta;
         }
-        public string Insertar(Categoria obj)
+        public static string Insertar(Categoria obj)
         {
             string Rpta = "";
             SqlConnection SqlCon = new SqlConnection();
@@ -113,7 +113,7 @@ namespace Sistema.Datos
             }
             return Rpta;
         }
-        public string Actualizar(Categoria obj)
+        public static string Actualizar(Categoria obj)
         {
             string Rpta = "";
             SqlConnection SqlCon = new SqlConnection();
@@ -138,7 +138,7 @@ namespace Sistema.Datos
             }
             return Rpta;
         }
-        public string Eliminar(int Id)
+        public static string Eliminar(int Id)
         {
             string Rpta = "";
             SqlConnection SqlCon = new SqlConnection();
@@ -161,7 +161,7 @@ namespace Sistema.Datos
             }
             return Rpta;
         }
-        public string Activar(int Id)
+        public static string Activar(int Id)
         {
             string Rpta = "";
             SqlConnection SqlCon = new SqlConnection();
@@ -184,7 +184,7 @@ namespace Sistema.Datos
             }
             return Rpta;
         }
-        public string Desactivar(int Id)
+        public static string Desactivar(int Id)
         {
             string Rpta = "";
             SqlConnection SqlCon = new SqlConnection();

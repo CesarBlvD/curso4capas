@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace Sistema.Datos
 {
-    public class Conexion
+    internal class Conexion
     {
         private string Base;
         private string Servidor;
@@ -16,7 +16,7 @@ namespace Sistema.Datos
         private bool Seguridad;
         private static Conexion Con = null;
 
-        private Conexion()
+        public Conexion()
         {
             this.Base = "dbsistema";
             this.Servidor = "BSISSS02DES\\SQL_DESA09";

@@ -13,18 +13,18 @@ namespace Sistema.Negocio
     {
         public static DataTable Listar()
         {
-            DCategoria Datos = new DCategoria();
-            return Datos.Listar();
+            
+            return DCategoria.Listar();
         }
         public static DataTable Buscar(string Valor)
         {
-            DCategoria Datos = new DCategoria();
-            return Datos.Buscar(Valor);
+            
+            return DCategoria.Buscar(Valor);
         }
         public static string Insertar(string Nombre, string Descripcion)
         {
-            DCategoria Datos = new DCategoria();
-            string Existe = Datos.Existe(Nombre);
+            
+            string Existe = DCategoria.Existe(Nombre);
             if (Existe.Equals("1"))
             {
                 return "La categoria ya existe";
@@ -34,41 +34,40 @@ namespace Sistema.Negocio
                 Categoria obj = new Categoria();
                 obj.Nombre = Nombre;
                 obj.Descripcion = Descripcion;
-                return Datos.Insertar(obj);
+                return DCategoria.Insertar(obj);
             }    
         }
         public static string Actualizar(int Id, string Nombre, string Descripcion)
         {
-            DCategoria Datos = new DCategoria();
+            
 
-            string Existe = Datos.Existe(Nombre);
+            string Existe = DCategoria.Existe(Nombre);
             if (Existe.Equals("1"))
             {
                 return "La categoria ya existe";
             }
             else
             {
-                Categoria obj = new Categoria();
-                obj.IdCategoria = Id;
-                obj.Nombre = Nombre;
-                obj.Descripcion = Descripcion;
-                return Datos.Actualizar(obj);
+                Categoria obj = new Categoria
+                {
+                    IdCategoria = Id,
+                    Nombre = Nombre,
+                    Descripcion = Descripcion
+                };
+                return DCategoria.Actualizar(obj);
             }
         }
         public static string Eliminar(int Id)
         {
-            DCategoria Datos = new DCategoria();
-            return Datos.Eliminar(Id);
+            return DCategoria.Eliminar(Id);
         }
         public static string Activar (int Id)
         {
-            DCategoria Datos = new DCategoria();
-            return Datos.Activar(Id);
+            return DCategoria.Activar(Id);
         }
         public static string Desactivar(int Id)
         {
-            DCategoria Datos = new DCategoria();
-            return Datos.Desactivar(Id);
+            return DCategoria.Desactivar(Id);
         }
     }
 }
