@@ -30,15 +30,20 @@ namespace Sistema.Datos
             SqlConnection Cadena = new SqlConnection();
             try
             {
-                Cadena.ConnectionString = "Server=" + this.Servidor + "; Database=" + this.Base + ";";
+                //string ConnectionString;
+                //Cadena.ConnectionString = $"Data Source={this.Servidor}; Initial Catalog={this.Base}; User ID={this.Usuario}; Password={this.Clave}";
+                 
+                Cadena.ConnectionString = $"Data Source={this.Servidor}; Initial Catalog={this.Base};";
                 if (this.Seguridad)
                 {
-                    Cadena.ConnectionString = Cadena.ConnectionString + "Integrated Security = SSPI";
+                    Cadena.ConnectionString = Cadena.ConnectionString + $"User ID ={ this.Usuario}; Password ={ this.Clave}";
                 }
                 else
                 {
-                    Cadena.ConnectionString = Cadena.ConnectionString + "User Id=" + this.Usuario + "; Password=" + this.Clave;
+
+                    Cadena.ConnectionString = Cadena.ConnectionString + "Integrated Security = SSPI";
                 }
+                
             }
             catch(Exception ex)
             {
