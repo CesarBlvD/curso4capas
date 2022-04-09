@@ -37,25 +37,35 @@ namespace Sistema.Negocio
                 return DCategoria.Insertar(obj);
             }    
         }
-        public static string Actualizar(int Id, string Nombre, string Descripcion)
+        public static string Actualizar(int Id,string NombreAnt, string Nombre, string Descripcion)
         {
             
-
             string Existe = DCategoria.Existe(Nombre);
-            if (Existe.Equals("1"))
+            Categoria obj = new Categoria();
+
+            if (NombreAnt.Equals(Nombre))
             {
-                return "La categoria ya existe";
+                obj.IdCategoria = Id;
+                obj.Nombre = Nombre;
+                obj.Descripcion = Descripcion;
+                return DCategoria.Actualizar(obj);
             }
             else
             {
-                Categoria obj = new Categoria
+                if (Existe.Equals("1"))
                 {
-                    IdCategoria = Id,
-                    Nombre = Nombre,
-                    Descripcion = Descripcion
-                };
-                return DCategoria.Actualizar(obj);
+                    return "La categoria ya existe";
+                }
+                else
+                {
+                    obj.IdCategoria = Id;
+                    obj.Nombre = Nombre;
+                    obj.Descripcion = Descripcion;
+                    return DCategoria.Actualizar(obj);
+                }
             }
+
+            
         }
         public static string Eliminar(int Id)
         {
