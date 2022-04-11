@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8B61A6A2-38EF-4D17-8A14-49626C08F419}</ProjectGuid>
+    <ProjectGuid>{11FDEF02-AD7F-4654-A140-E28742B5B7F0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sistema.Negocio</RootNamespace>
-    <AssemblyName>Sistema.Negocio</AssemblyName>
+    <RootNamespace>Sistema.Entidades</RootNamespace>
+    <AssemblyName>Sistema.Entidades</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -41,18 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NCategoria.cs" />
+    <Compile Include="Categoria.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Sistema.Datos\Sistema.Datos.csproj">
-      <Project>{6cd73d19-efc8-41f5-b775-5b924358c655}</Project>
-      <Name>Sistema.Datos</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Sistema.Entidades\Sistema.Entidades.csproj">
-      <Project>{11fdef02-ad7f-4654-a140-e28742b5b7f0}</Project>
-      <Name>Sistema.Entidades</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,7 +1,6 @@
-﻿
-namespace Solucion
+﻿namespace Sistema.Datos
 {
-    partial class Form1
+    partial class UserControl1
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -21,7 +20,7 @@ namespace Solucion
             base.Dispose(disposing);
         }
 
-        #region Código generado por el Diseñador de Windows Forms
+        #region Código generado por el Diseñador de componentes
 
         /// <summary>
         /// Método necesario para admitir el Diseñador. No se puede modificar
@@ -29,13 +28,11 @@ namespace Solucion
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
         }
 
         #endregion
     }
 }
-
