@@ -66,6 +66,12 @@ namespace Solucion
             BtnInsertar.Visible = true;
             BtnActualizar.Visible = false;
             ErrorIcono.Clear();
+
+            DgvListado.Columns[0].Visible = false;
+            BtnActivar.Visible = false;
+            BtnDesactivar.Visible = false;
+            BtnEliminar.Visible = false;
+            ChkSeleccionar.Checked = false; 
         }
 
         private void MensajeError(string Mensaje)
@@ -85,7 +91,11 @@ namespace Solucion
 
         private void DgvListado_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            if (e.ColumnIndex == DgvListado.Columns["Seleccionar"].Index)
+            {
+                DataGridViewCheckBoxCell ChkEliminar = (DataGridViewCheckBoxCell)DgvListado.Rows[e.RowIndex].Cells["Seleccionar"];
+                ChkEliminar.Value = !Convert.ToBoolean(ChkEliminar.Value);
+            }
         }
 
         private void BtnBuscar_Click(object sender, EventArgs e)
@@ -132,14 +142,22 @@ namespace Solucion
 
         private void DgvListado_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            this.Limpiar();
-            BtnActualizar.Visible = true;
-            BtnInsertar.Visible = false;
-            TxtId.Text = Convert.ToString(DgvListado.CurrentRow.Cells["ID"].Value);
-            this.NombreAnt = Convert.ToString(DgvListado.CurrentRow.Cells["Nombre"].Value);
-            TxtNombre.Text = Convert.ToString(DgvListado.CurrentRow.Cells["Nombre"].Value);
-            TxtDescripcion.Text = Convert.ToString(DgvListado.CurrentRow.Cells["Descripcion"].Value);
-            TabGeneral.SelectedIndex = 1;
+            try
+            {
+                this.Limpiar();
+                BtnActualizar.Visible = true;
+                BtnInsertar.Visible = false;
+                TxtId.Text = Convert.ToString(DgvListado.CurrentRow.Cells["ID"].Value);
+                this.NombreAnt = Convert.ToString(DgvListado.CurrentRow.Cells["Nombre"].Value);
+                TxtNombre.Text = Convert.ToString(DgvListado.CurrentRow.Cells["Nombre"].Value);
+                TxtDescripcion.Text = Convert.ToString(DgvListado.CurrentRow.Cells["Descripcion"].Value);
+                TabGeneral.SelectedIndex = 1;
+            }
+            catch(Exception)
+            {
+                MessageBox.Show("Seleccione desde la celda nombre");
+            }
+            
         }
 
         private void BtnActualizar_Click(object sender, EventArgs e)
@@ -190,6 +208,117 @@ namespace Solucion
                 BtnDesactivar.Visible = false;
                 BtnEliminar.Visible = false;
 
+            }
+        }
+
+        private void BtnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult Opcion;
+                Opcion = MessageBox.Show("Realmente deseas eliminar el registro?", "Sistema de ventas", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if(Opcion == DialogResult.OK)
+                {
+                    int Codigo;
+                    string Rpta = "";
+
+                    foreach(DataGridView row in DgvListado.Rows)
+                    {
+                        if(Convert.ToBoolean(row.Cells[0].Value))
+                        {
+                            Codigo = Convert.ToInt32(row.Cells[1].Value);
+                            Rpta = NCategoria.Eliminar(Codigo);
+
+                            if(Rpta.Equals("OK"))
+                            {
+                                this.MensajeOK("Se elimino el resitro: " + Convert.ToString(row.Cells[1].Value));
+                            }
+                            else
+                            {
+                                this.MensajeError(Rpta);
+                            }
+                        }
+                    }
+                    this.Listar(); 
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message + ex.StackTrace);
+            }
+        }
+
+        private void BtnActivar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult Opcion;
+                Opcion = MessageBox.Show("Realmente deseas activar el registro?", "Sistema de ventas", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (Opcion == DialogResult.OK)
+                {
+                    int Codigo;
+                    string Rpta = "";
+
+                    foreach (DataGridView row in DgvListado.Rows)
+                    {
+                        if (Convert.ToBoolean(row.Cells[0].Value))
+                        {
+                            Codigo = Convert.ToInt32(row.Cells[1].Value);
+                            Rpta = NCategoria.Activar(Codigo);
+
+                            if (Rpta.Equals("OK"))
+                            {
+                                this.MensajeOK("Se Activo el resitro: " + Convert.ToString(row.Cells[1].Value));
+                            }
+                            else
+                            {
+                                this.MensajeError(Rpta);
+                            }
+                        }
+                    }
+                    this.Listar();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + ex.StackTrace);
+            }
+        }
+
+        private void BtnDesactivar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult Opcion;
+                Opcion = MessageBox.Show("Realmente deseas desactivar el registro?", "Sistema de ventas", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (Opcion == DialogResult.OK)
+                {
+                    int Codigo;
+                    string Rpta = "";
+
+                    foreach (DataGridView row in DgvListado.Rows)
+                    {
+                        if (Convert.ToBoolean(row.Cells[0].Value))
+                        {
+                            Codigo = Convert.ToInt32(row.Cells[1].Value);
+                            Rpta = NCategoria.Desactivar(Codigo);
+
+                            if (Rpta.Equals("OK"))
+                            {
+                                this.MensajeOK("Se desactivo el resitro: " + Convert.ToString(row.Cells[1].Value));
+                            }
+                            else
+                            {
+                                this.MensajeError(Rpta);
+                            }
+                        }
+                    }
+                    this.Listar();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + ex.StackTrace);
             }
         }
     }
